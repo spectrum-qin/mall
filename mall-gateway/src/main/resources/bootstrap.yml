@@ -1,0 +1,31 @@
+server:
+  port: 8180
+spring:
+  application:
+    name: mall-gateway
+  cloud:
+    nacos:
+      config:
+        server-addr: 118.25.4.178:8848
+        file-extension: yaml
+        group: mall
+      discovery:
+        server-addr: 118.25.4.178:8848
+        group: mall
+    gateway:
+      discovery:
+        locator:
+          enabled: true # 让gateway可以发现nacos中的微服务
+      routes:
+        - id: mall-order
+          uri: lb://mall-order # lb指的是从nacos中按照名称获取微服务,并遵循负载均衡策略
+          predicates:
+            - Path=/mall-order/**
+          filters:
+            - StripPrefix=1
+        - id: mall-user
+          uri: lb://mall-user # lb指的是从nacos中按照名称获取微服务,并遵循负载均衡策略
+          predicates:
+            - Path=/mall-user/**
+          filters:
+            - StripPrefix=1

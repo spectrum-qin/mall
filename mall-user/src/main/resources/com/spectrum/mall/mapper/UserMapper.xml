@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.spectrum.mall.mapper.UserMapper">
+
+	<resultMap id="Result" type="com.spectrum.mall.domain.User">
+				<id property="id" column="id" />
+				<result property="name" column="name" />
+	</resultMap>
+	
+	
+	<sql id="table">
+		user
+	</sql>
+	
+	<sql id="demoSet">
+	  <set>
+	    name=#{name}
+	  </set>
+	</sql>
+	
+	<sql id="columns">
+		id,name
+	</sql>
+
+   <!-- 单条插入记录  -->
+	<insert id="add" parameterType="com.spectrum.mall.domain.User">
+	   <!--
+	     <selectKey keyProperty="id" resultType="long">
+            select LAST_INSERT_ID()
+        </selectKey>  -->
+		INSERT INTO <include refid="table" />
+		(<include refid="columns"/>)
+		VALUES
+		(#{id}, #{name})
+	</insert>
+	
+	<!-- 批量插入  -->
+	<insert id="addBatch" parameterType="java.util.List">
+        INSERT INTO    <include refid="table" />
+		   ( <include refid="columns" />)
+		VALUES
+        <foreach collection="list"  item="item" separator="," index="index">
+           (#{item.id}, #{item.name})
+        </foreach>
+    </insert>
+	
+	<!-- 根据主键ID进行物理删除  -->
+	<delete id="deleteById" parameterType="String">
+		DELETE FROM  <include refid="table" />
+		WHERE id=#{id}
+	</delete>
+	
+	<!-- 根据主键ID进行逻辑删除  -->
+	<delete id="delLogicById" parameterType="String">
+		UPDATE   <include refid="table" />
+		SET DEL_FLAG='1'
+		WHERE id=#{id}
+	</delete>
+	
+	<!-- 批量物理删除  -->
+	<delete id="deleteBatchIds"  parameterType = "java.util.List">
+       DELETE FROM <include refid="table" />
+       WHERE id IN
+       <foreach collection="list"  item="item" open="(" separator="," close=")"  >
+       #{item}
+       </foreach>
+   </delete>
+
+	<!-- 根据ID修改  -->
+	<update id="updateById" parameterType="com.spectrum.mall.domain.User">
+		UPDATE  <include refid="table" />
+		<set>
+		    update_time=#{ updateTime} 
+			<if test="@Ognl.Ognl@isNotEmpty(updateUser)"> update_user=#{ updateUser}, </if>
+			 
+		</set>
+		WHERE id=#{id}
+	</update>
+		
+    <!-- 根据ID查询单笔记录  -->
+	<select id="findOneById" parameterType="String" resultMap="Result">
+		SELECT <include refid="columns"/>
+		FROM  <include refid="table" />
+		WHERE id=#{id}
+	</select>
+	
+	<!-- 根据ID列表 查询相关记录  -->
+	<select id="findAll" parameterType="String" resultMap="Result">
+		SELECT <include refid="columns"/>
+		FROM  <include refid="table" />
+		<if test="@Ognl.Ognl@isNotEmpty(list)">
+		WHERE id IN
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+				#{item}
+		</foreach>
+		</if>
+	</select>
+	
+	<select id="find" parameterType="com.spectrum.mall.domain.User" resultMap="Result">
+		SELECT <include refid="columns"/>
+		FROM  <include refid="table" />
+		WHERE DEL_FLAG='0'
+	</select>
+
+	<select id="selectUserInfoByIdNo" resultType="com.spectrum.mall.domain.User">
+		SELECT <include refid="columns"/>
+		FROM  <include refid="table" />
+		where id_no = #{idNo}
+	</select>
+
+	<select id="selectUserInfoByUserName" resultType="com.spectrum.mall.domain.User">
+		SELECT <include refid="columns"/>
+		FROM  <include refid="table" />
+		where user_name= #{userName}
+	</select>
+</mapper>

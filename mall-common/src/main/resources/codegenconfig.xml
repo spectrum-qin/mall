@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="gbk" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="codegen.xsd">
+
+
+    <templates basepath="/Users/spectrum/Downloads/test">
+        <template id="po" path="po.ftl" />
+        <template id="domain" path="domain.ftl" />
+        <template id="mapper" path="mapper.ftl" />
+        <template id="mapper-xml" path="mapper-xml.ftl" />
+<!--        <template id="service" path="service.ftl" />-->
+        <template id="service" path="servicei.ftl" />
+        <template id="serviceimpl" path="serviceimpl.ftl" />
+        <!-- <template id="abstractPo" path="abstractPo.ftl" />
+        <template id="genericDao" path="genericDao.ftl" />
+        <template id="abstractDomain" path="abstractDomain.ftl" /> -->
+    </templates>
+
+    <files baseDir="/Users/spectrum/Downloads/test">
+        <file refTemplate="po" filename="{class}Po.java"             dir="src/main/java/{xmlParentDir}/{module}/po" />
+        <file refTemplate="domain" filename="{class}.java"           dir="src/main/java/{xmlParentDir}/{module}/domain" />
+        <file refTemplate="mapper" filename="{class}Mapper.java"     dir="src/main/java/{xmlParentDir}/{module}/mapper" />
+        <file refTemplate="mapper-xml" filename="{class}Mapper.xml"  dir="src/main/resources/{xmlParentDir}/{module}/mapper" />
+<!--        <file refTemplate="service" filename="{class}Service.java"   dir="src/main/java/{xmlParentDir}/{module}/service" />-->
+        <file refTemplate="service" filename="{class}Service.java"   dir="src/main/java/{xmlParentDir}/{module}/service" />
+        <file refTemplate="serviceimpl" filename="{class}ServiceImpl.java"   dir="src/main/java/{xmlParentDir}/{module}/service/impl" />
+
+        <!-- <file refTemplate="abstractPo" filename="AbstractPo.java"
+            dir="src/main/java/com/{company}/{project}{dirSubProject}/orm" />
+       <file refTemplate="genericDao" filename="GenericDao.java"
+            dir="src/main/java/com/{company}/{project}{dirSubProject}/orm" />
+        <file refTemplate="abstractDomain" filename="Domain.java"
+            dir="src/main/java/com/{company}/{project}{dirSubProject}/orm" />	 -->
+
+    </files>
+
+</config>

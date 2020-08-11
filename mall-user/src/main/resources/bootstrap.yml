@@ -1,0 +1,20 @@
+server:
+  port: 8181
+spring:
+  application:
+    name: mall-user
+  cloud:
+    nacos:
+      config:
+        server-addr: 118.25.4.178:8848
+        file-extension: yaml
+        group: mall
+        extension-configs: logback.xml
+      discovery:
+        server-addr: 118.25.4.178:8848
+        group: mall
+        enabled: true
+        service: ${spring.application.name}
+#    sentinel:
+#      transport:
+#        port: 8722 # sentinel需要回调服务应用

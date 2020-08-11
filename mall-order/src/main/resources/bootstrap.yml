@@ -1,0 +1,17 @@
+server:
+  port: 8182
+spring:
+  application:
+    name: mall-order
+  cloud:
+    nacos:
+      config:
+        server-addr: 118.25.4.178:8848
+        file-extension: yaml # 配置文件格式
+        group: mall
+        extension-configs: logback.xml
+      discovery:
+        server-addr: 118.25.4.178:8848
+        group: mall
+        enabled: true
+        service: ${spring.application.name}

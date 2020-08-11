@@ -1,0 +1,44 @@
+package com.spectrum.mall.controller;
+
+import com.spectrum.mall.entity.DataRequest;
+import com.spectrum.mall.entity.DataResponse;
+import com.spectrum.mall.feign.UserFeign;
+import com.spectrum.mall.request.order.OrderAddRequest;
+import com.spectrum.mall.request.user.UserAddRequest;
+import com.spectrum.mall.service.OrderService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * @author oe_qinzuopu
+ */
+@Slf4j
+@Api(tags = "客户管理")
+@RestController
+public class OrderController {
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private UserFeign userFeign;
+
+    @RequestMapping(value = "/api/order/add", method = RequestMethod.POST)
+    @ApiOperation(value = "新增客户详情", notes = "新增客户详情")
+    public DataResponse<?> orderAdd(@RequestBody @ApiParam(name = "data", value = "新增客户请求实体",
+            required = true) @Validated DataRequest<OrderAddRequest> data) {
+        OrderAddRequest orderAddRequest = data.getData();
+        UserAddRequest userAddRequest = new UserAddRequest();
+        userAddRequest.setName("张三");
+        DataRequest<UserAddRequest> dataRequest = new DataRequest<>();
+        dataRequest.setSysId("11");
+        dataRequest.setData(userAddRequest);
+        DataResponse<?> response = userFeign.userAdd(dataRequest);
+        return DataResponse.succeed(response);
+    }
+}
