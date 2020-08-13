@@ -1,5 +1,7 @@
 package com.spectrum.mall.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.spectrum.mall.entity.DataRequest;
 import com.spectrum.mall.entity.DataResponse;
 import com.spectrum.mall.feign.UserFeign;
@@ -28,17 +30,25 @@ public class OrderController {
     @Autowired
     private UserFeign userFeign;
 
+    @HystrixCommand(commandKey = "orderAdd", fallbackMethod = "userAddFallback")
     @RequestMapping(value = "/api/order/add", method = RequestMethod.POST)
     @ApiOperation(value = "新增客户详情", notes = "新增客户详情")
     public DataResponse<?> orderAdd(@RequestBody @ApiParam(name = "data", value = "新增客户请求实体",
             required = true) @Validated DataRequest<OrderAddRequest> data) {
         OrderAddRequest orderAddRequest = data.getData();
         UserAddRequest userAddRequest = new UserAddRequest();
-        userAddRequest.setName("张三");
-        DataRequest<UserAddRequest> dataRequest = new DataRequest<>();
+        DataRequest<UserAddRequest> dataRequest = new DataRequest<UserAddRequest>(userAddRequest);
+        userAddRequest.setName(orderAddRequest.getUserName());
         dataRequest.setSysId("11");
-        dataRequest.setData(userAddRequest);
+        long t2 = System.currentTimeMillis();
         DataResponse<?> response = userFeign.userAdd(dataRequest);
+        log.info( "执行时间:" + (System.currentTimeMillis() - t2 + "ms"));
         return DataResponse.succeed(response);
     }
+
+    public DataResponse<?> userAddFallback(DataRequest<UserAddRequest> userAddRequest) {
+        log.info("fallback降级处理");
+        return DataResponse.failed();
+    }
+
 }
