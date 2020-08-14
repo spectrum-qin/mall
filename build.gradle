@@ -44,7 +44,9 @@ allprojects {
 
         compile("com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery:2.2.0.RELEASE")
 
-        compile("com.github.xiaoymin:knife4j-spring-boot-starter:2.0.2")
+        compile("com.github.xiaoymin:knife4j-spring-boot-starter:2.0.3")
+
+        compile("com.github.xiaoymin:knife4j-micro-spring-boot-starter:2.0.3")
 
         compile('org.projectlombok:lombok:1.18.8')
 

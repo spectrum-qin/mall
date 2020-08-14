@@ -30,7 +30,7 @@ public class OrderController {
     @Autowired
     private UserFeign userFeign;
 
-    @HystrixCommand(commandKey = "orderAdd", fallbackMethod = "userAddFallback")
+//    @HystrixCommand(commandKey = "orderAdd", fallbackMethod = "userAddFallback")
     @RequestMapping(value = "/api/order/add", method = RequestMethod.POST)
     @ApiOperation(value = "新增客户详情", notes = "新增客户详情")
     public DataResponse<?> orderAdd(@RequestBody @ApiParam(name = "data", value = "新增客户请求实体",
