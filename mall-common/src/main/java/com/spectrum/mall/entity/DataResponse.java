@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.spectrum.mall.common.IExceptionCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -19,6 +20,7 @@ import java.io.Serializable;
 )
 @EqualsAndHashCode
 @ToString
+@Data
 public class DataResponse<T> implements Serializable {
     private static final long serialVersionUID = 1L;
     public static final String SUCCESS = "0000000";
@@ -98,39 +100,6 @@ public class DataResponse<T> implements Serializable {
     public static DataResponse.Builder builder() {
         return new DataResponse.Builder();
     }
-
-    public String getCode() {
-        return this.code;
-    }
-
-    public String getMessage() {
-        return this.message;
-    }
-
-    public T getData() {
-        return this.data;
-    }
-
-    public Page getPagination() {
-        return this.pagination;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public void setPagination(Page pagination) {
-        this.pagination = pagination;
-    }
-
 
     public static class Builder {
         private String code;

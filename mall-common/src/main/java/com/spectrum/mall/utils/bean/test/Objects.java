@@ -1,9 +1,8 @@
 package com.spectrum.mall.utils.bean.test;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.cglib.beans.BeanCopier;
-import org.springframework.core.convert.converter.Converter;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
