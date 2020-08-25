@@ -1,5 +1,3 @@
-server:
-  port: 8182
 spring:
   application:
     name: mall-order
@@ -14,3 +12,12 @@ spring:
         group: mall
         enabled: true
         service: ${spring.application.name}
+    stream:
+      bindings:
+        qfOutputChannel:
+          destination: qfTest2Topic
+          content-type: application/json
+      rabbit:
+        binder:
+          admin-addresses: 118.25.4.178
+          nodes: 15672

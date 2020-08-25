@@ -4,7 +4,6 @@ import com.spectrum.mall.common.ServiceException;
 import com.spectrum.mall.common.user.UserExceptionCode;
 import com.spectrum.mall.domain.User;
 import com.spectrum.mall.mapper.UserMapper;
-import com.spectrum.mall.mybatis.service.AbstractService;
 import com.spectrum.mall.service.UserService;
 import com.spectrum.mall.utils.text.StringUtils;
 import lombok.extern.slf4j.Slf4j;

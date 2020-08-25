@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: mall-gateway
   cloud:
     nacos:
       config:
@@ -10,21 +8,3 @@ spring:
       discovery:
         server-addr: 118.25.4.178:8848
         group: mall
-    gateway:
-      discovery:
-        locator:
-          enabled: true # 让gateway可以发现nacos中的微服务
-          lower-case-service-id: true #使用小写服务名，默认是大写
-      routes:
-        - id: order
-          uri: lb://mall-order # lb指的是从nacos中按照名称获取微服务,并遵循负载均衡策略
-          predicates:
-            - Path=/order/**
-          filters:
-            - StripPrefix=1
-        - id: user
-          uri: lb://mall-user # lb指的是从nacos中按照名称获取微服务,并遵循负载均衡策略
-          predicates:
-            - Path=/user/**
-          filters:
-            - StripPrefix=1

@@ -1,3 +1,5 @@
+package com.spectrum.mall.config;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.config.GatewayProperties;
@@ -11,6 +13,9 @@ import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author oe_qinzuopu
+ */
 @Slf4j
 @Component
 @Primary

@@ -3,6 +3,3 @@ include 'mall-gateway'
 include 'mall-order'
 include 'mall-user'
 include 'mall-common'
-include 'mall-common'
-include 'mall-common'
-

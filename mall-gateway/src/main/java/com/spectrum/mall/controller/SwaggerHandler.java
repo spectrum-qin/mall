@@ -11,7 +11,7 @@ import springfox.documentation.swagger.web.*;
 import java.util.Optional;
 
 @RestController
-public class SwaggerController {
+public class SwaggerHandler {
 
     @Autowired(required = false)
     private SecurityConfiguration securityConfiguration;
@@ -19,12 +19,13 @@ public class SwaggerController {
     @Autowired(required = false)
     private UiConfiguration uiConfiguration;
 
-    private final SwaggerResourcesProvider swaggerResources;
-
     @Autowired
-    public SwaggerController(SwaggerResourcesProvider swaggerResources) {
-        this.swaggerResources = swaggerResources;
-    }
+    private  SwaggerResourcesProvider swaggerResources;
+
+//    @Autowired
+//    public SwaggerHandler(SwaggerResourcesProvider swaggerResources) {
+//        this.swaggerResources = swaggerResources;
+//    }
 
     /**
      * Swagger安全配置，支持oauth和apiKey设置
