@@ -6,16 +6,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.core.NamedThreadLocal;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.util.Date;
 
 /**
  * @author oe_qinzuopu
@@ -114,7 +110,6 @@ public class SystemLogAspect {
 
     /**
      *  异常通知
-     * @param joinPoint
      * @param e
      */
     @AfterThrowing(pointcut = "controllerPointerCut()", throwing = "e")

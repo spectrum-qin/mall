@@ -11,6 +11,7 @@ import com.spectrum.mall.feign.UserFeign;
 import com.spectrum.mall.request.order.OrderAddRequest;
 import com.spectrum.mall.request.user.UserAddRequest;
 import com.spectrum.mall.service.OrderService;
+import com.spectrum.mall.sync.produce.send.MessageSend;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -33,6 +34,9 @@ public class OrderController {
     @Autowired
     private UserFeign userFeign;
 
+    @Autowired
+    private MessageSend messageSend;
+
 //    @HystrixCommand(commandKey = "orderAdd", fallbackMethod = "userAddFallback")
     @RequestMapping(value = "/api/order/add", method = RequestMethod.POST)
     @ApiOperation(value = "新增客户详情", notes = "新增客户详情")
@@ -40,11 +44,12 @@ public class OrderController {
             required = true) @Validated DataRequest<OrderAddRequest> data) {
         OrderAddRequest orderAddRequest = data.getData();
         UserAddRequest userAddRequest = new UserAddRequest();
-        DataRequest<UserAddRequest> dataRequest = new DataRequest<UserAddRequest>(userAddRequest);
+        DataRequest<UserAddRequest> dataRequest = new DataRequest<UserAddRequest>(userAddRequest, data.getFlowId());
         userAddRequest.setName(orderAddRequest.getUserName());
         dataRequest.setSysId("11");
         long t2 = System.currentTimeMillis();
         DataResponse<?> response = userFeign.userAdd(dataRequest);
+        messageSend.msgSend("执行完成");
         log.info( "执行时间:" + (System.currentTimeMillis() - t2 + "ms"));
         return DataResponse.succeed(response);
     }

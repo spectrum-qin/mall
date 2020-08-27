@@ -5,5 +5,5 @@ package com.spectrum.mall.sync.customer.constance;
  */
 public class InputChannelConstance {
 
-    public final static String INPUT_INPUT = "input";
+    public final static String INPUT_CHANNEL = "inputChannel";
 }

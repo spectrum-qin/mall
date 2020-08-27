@@ -27,11 +27,11 @@ public class UserServiceImpl implements UserService {
         if (StringUtils.isEmpty(user)) {
             throw new ServiceException(UserExceptionCode.USER_UPDATE);
         }
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            TimeUnit.SECONDS.sleep(5);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
         userMapper.insert(user);
         log.info( "执行时间:" + (System.currentTimeMillis() - t2 + "ms"));

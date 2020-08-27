@@ -1,4 +1,4 @@
-package com.spectrum.mall.sync.customer.constance;
+package com.spectrum.mall.sync.produce.constance;
 
 /**
  * @author oe_qinzuopu

@@ -61,7 +61,9 @@ public class DataRequest<T> implements Serializable{
 
     public DataRequest(T data, String flowId) {
         this(data);
+        this.version = "1.0.0";
         this.flowId = flowId;
+        this.timestamp = DateUtils.getCurDT() + DateUtils.getCurTM();
     }
 
     public DataRequest(T data, Integer current, Integer pageSize) {

@@ -9,6 +9,6 @@ import org.springframework.messaging.SubscribableChannel;
  */
 public interface InputChannel {
 
-    @Input(InputChannelConstance.INPUT_INPUT)
-    SubscribableChannel input();
+    @Input(InputChannelConstance.INPUT_CHANNEL)
+    SubscribableChannel inputChannel();
 }
