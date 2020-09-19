@@ -1,17 +1,18 @@
 package com.spectrum.mall.sync.produce.send;
 
+import com.spectrum.mall.common.ServiceException;
+import com.spectrum.mall.common.user.UserExceptionCode;
 import com.spectrum.mall.sync.produce.channel.OutputChannel;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.stereotype.Component;
 
 /**
  * @author oe_qinzuopu
  */
-@Component
-@EnableBinding({Source.class, OutputChannel.class})
+@Slf4j
+@EnableBinding({OutputChannel.class})
 public class MessageSend {
 
     @Autowired
@@ -19,6 +20,12 @@ public class MessageSend {
 
     public void msgSend(String msg) {
 
-        outputChannel.outputChannel().send(MessageBuilder.withPayload(msg).build());
+        try {
+            outputChannel.outputChannel().send(MessageBuilder.withPayload(msg).build());
+            log.info("推送消息成功");
+        } catch (Exception e) {
+            throw new ServiceException(UserExceptionCode.USER_UPDATE);
+        }
+
     }
 }

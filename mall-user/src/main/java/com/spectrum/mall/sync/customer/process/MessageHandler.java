@@ -12,7 +12,7 @@ import org.springframework.messaging.Message;
 /**
  * @author oe_qinzuopu
  */
-@EnableBinding({Sink.class, InputChannel.class})
+@EnableBinding({InputChannel.class})
 public class MessageHandler {
 
     @StreamListener(InputChannelConstance.INPUT_CHANNEL)

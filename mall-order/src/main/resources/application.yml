@@ -1,0 +1,79 @@
+spring:
+  application:
+    name: mall-order #服务名称
+  datasource:
+    url: jdbc:mysql://118.25.4.178:3306/mall?useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: spectrum@866
+    tomcat:
+      time-between-eviction-runs-millis: 60000 #指定空闲连接检查、废弃连接清理、空闲连接池大小调整之间的操作时间间隔
+      min-evictable-idle-time-millis: 300000 #指定一个空闲连接最少空闲多久后可被清除
+      initial-size: 5 #连接池初始化大小
+      min-idle: 10 #最小空闲连接数
+      max-active: 20 #最大连接数
+  rabbitmq:
+    addresses: 122.51.247.67
+    port: 5672
+    username: admin
+    password: 1qaz!QAZ
+    virtual-host: /
+
+  cloud:
+    stream:
+      bindings:
+        outputChannel: # 这个名字是一个通道的名称
+          destination: testRabbitExchange # 表示要使用的Exchange名称定义
+          group: study-group
+          contenttype: application/json # 设置消息类型，本次为对象json，如果是文本则设置“text/plain”
+      rabbit:
+        bindings:
+          outputChannel:
+            producer: # 进行消费端配置
+              routingKeyExpression: '''study-key'''
+
+server:
+  port: 8182 #运行端口号
+  max-http-header-size: 20480
+
+feign:
+  hystrix:
+    enabled: true #在Feign中开启Hystrix
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+  OkToRetryOnAllOperations: false
+
+hystrix:
+  threadpool:
+    default:
+      coreSize: 100 #并发执行的最大线程数，默认10，根据服务器性能自己设置线程池
+      maxQueueSize: 50 #BlockingQueue的最大队列数
+      queueSizeRejectionThreshold: 50 #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            # 设置熔断超时时间 毫秒
+            timeoutInMilliseconds: 10000
+            strategy: SEMAPHORE   #隔离策略
+            semaphore:
+              max-semaphores: 100 #信号量大小
+    orderAdd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+            strategy: SEMAPHORE   #隔离策略
+            semaphore:
+              max-semaphores: 100 #信号量大小
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*.xml

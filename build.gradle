@@ -50,6 +50,8 @@ allprojects {
 
         compile('org.projectlombok:lombok:1.18.8')
 
+        compile('cn.hutool:hutool-all:5.4.0')
+
         testCompile("junit:junit:$junitVersion")
         //也可直接将版本写在最后 compile("org.slf4j:slf4j-api:1.7.16")
         //另外一种形式 (group + name + version) compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.16'

@@ -4,6 +4,7 @@ import com.spectrum.mall.utils.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -22,6 +23,7 @@ public class IdCardUtils {
     private static final Map<String, Integer> twFirstCode = new HashMap();
     private static final Map<String, Integer> hkFirstCode = new HashMap();
     private static Map<String, String> identityNoList = null;
+    private static String rootPath;
 
     public IdCardUtils() {
     }
@@ -507,7 +509,7 @@ public class IdCardUtils {
 
     private static Map<String, String> loadIndetityNoList() {
         final Map<String, String> words = new HashMap();
-        String path = "classpath:config/zsf/boot/util/identity.txt";
+        String path = getRootPath() + "identity.txt";
         ResourceLoaderUtils.load(new ResourceLoader() {
             public void clear() {
             }
@@ -563,5 +565,17 @@ public class IdCardUtils {
         hkFirstCode.put("W", 23);
         hkFirstCode.put("O", 15);
         hkFirstCode.put("N", 14);
+    }
+
+    private static String getRootPath() {
+        if (rootPath.isEmpty()) {
+            rootPath = (new File("")).getAbsolutePath();
+        }
+
+        if (!rootPath.endsWith("/")) {
+            rootPath = rootPath + "/";
+        }
+
+        return rootPath;
     }
 }
