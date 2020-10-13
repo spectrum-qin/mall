@@ -1,22 +1,26 @@
 spring:
   application:
-    name: mall-user
+    name: mall-user # 系统名称
+  profiles:
+    active: dev # 环境变量
   cloud:
     nacos:
       config:
-        server-addr: 118.25.4.178:8848
-        file-extension: yaml
-        group: mall
+        server-addr: 118.25.4.178:8848 # NACOS服务器地址
+        file-extension: yaml # 配置文件格式
+        group: mall # NACOS配置文件分组名
         extension-configs[0]:
           data-id: logback.xml
           group: mall
           refresh: true
+        namespace: ${spring.profiles.active} # NACOS配置文件所在命名空间
       discovery:
         server-addr: 118.25.4.178:8848
         group: mall
         enabled: true
         service: ${spring.application.name}
-        ip: 10.94.20.25 #自定义注册Nacos实例的IP地址
+#        ip: 10.94.20.25 # 自定义注册Nacos实例的IP地址
+        namespace: ${spring.profiles.active} # NACOS配置文件所在命名空间
 #    sentinel:
 #      transport:
 #        port: 8722 # sentinel需要回调服务应用

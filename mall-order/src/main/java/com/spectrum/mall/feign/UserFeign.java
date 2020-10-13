@@ -1,10 +1,9 @@
 package com.spectrum.mall.feign;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.spectrum.mall.entity.DataRequest;
 import com.spectrum.mall.entity.DataResponse;
 import com.spectrum.mall.request.user.UserAddRequest;
+import com.spectrum.mall.response.user.UserAddResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface UserFeign {
 
     @PostMapping(value = "/api/custom/manage/addCustManage")
-    DataResponse<?> userAdd(@RequestBody DataRequest<UserAddRequest> userAddRequest);
+    DataResponse<UserAddResponse> userAdd(@RequestBody DataRequest<UserAddRequest> userAddRequest);
 
 }
 
@@ -31,7 +30,7 @@ public interface UserFeign {
 class UserFeignFallback implements UserFeign{
 
     @Override
-    public DataResponse<?> userAdd(DataRequest<UserAddRequest> userAddRequest) {
+    public DataResponse<UserAddResponse> userAdd(DataRequest<UserAddRequest> userAddRequest) {
         log.info("fallback降级处理");
         return DataResponse.failed();
     }

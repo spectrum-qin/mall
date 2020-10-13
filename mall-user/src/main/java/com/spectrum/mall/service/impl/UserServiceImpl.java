@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(UserExceptionCode.USER_UPDATE);
         }
 //        try {
-//            TimeUnit.SECONDS.sleep(5);
+//            TimeUnit.SECONDS.sleep(8);
 //        } catch (InterruptedException e) {
 //            e.printStackTrace();
 //        }

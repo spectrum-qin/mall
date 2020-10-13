@@ -4,6 +4,7 @@ import com.spectrum.mall.domain.User;
 import com.spectrum.mall.entity.DataRequest;
 import com.spectrum.mall.entity.DataResponse;
 import com.spectrum.mall.request.user.UserAddRequest;
+import com.spectrum.mall.response.user.UserAddResponse;
 import com.spectrum.mall.service.UserService;
 import com.spectrum.mall.service.impl.UserServiceImpl;
 import com.spectrum.mall.utils.bean.BeanUtils;
@@ -30,12 +31,14 @@ public class UserController {
     @RequestMapping(value = "/api/custom/manage/addCustManage",method = RequestMethod.POST)
     @ApiOperation(value = "新增客户详情", notes = "新增客户详情")
     @ResponseBody
-    public DataResponse<?> userAdd(@RequestBody @ApiParam(name = "data", value = "新增客户请求实体",
+    public DataResponse<UserAddResponse> userAdd(@RequestBody @ApiParam(name = "data", value = "新增客户请求实体",
             required = true) @Validated DataRequest<UserAddRequest> data) {
         log.info("接收到的参数为：" + JsonUtils.objectToJson(data));
         UserAddRequest userAddRequest = data.getData();
         User user1 = BeanUtils.copyProperties(User.class, userAddRequest);
         userService.addCustManage(user1);
-        return DataResponse.succeed();
+        UserAddResponse response = new UserAddResponse();
+        response.setId(user1.getId());
+        return DataResponse.succeed(response);
     }
 }
