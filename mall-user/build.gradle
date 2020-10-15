@@ -10,4 +10,5 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-stream-rabbit:3.0.0.RELEASE')
     compile('mysql:mysql-connector-java:8.0.15')
     compile('com.baomidou:mybatis-plus-boot-starter:3.3.0')
+    compile('com.github.kfcfans:powerjob-worker-spring-boot-starter:3.2.3')
 }

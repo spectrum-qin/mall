@@ -1,0 +1,12 @@
+apply plugin:'application'
+//声明spring-boot插件
+apply plugin: "org.springframework.boot"
+//启动项
+mainClassName = "com.spectrum.mall.MallAdminApplication"
+dependencies {
+    compile project(":mall-common")
+    compile('de.codecentric:spring-boot-admin-starter-server:2.2.3')
+    compile('de.codecentric:spring-boot-admin-server-ui:2.2.3')
+    compile('org.springframework.boot:spring-boot-starter-security:2.2.6.RELEASE')
+    compile('org.apache.httpcomponents:httpclient:4.5.12')
+}
