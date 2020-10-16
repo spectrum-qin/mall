@@ -14,8 +14,8 @@ dependencies {
     compile('com.github.pagehelper:pagehelper:5.1.10')
     compile('org.aspectj:aspectjweaver:1.9.5')
     compile('javax.servlet:javax.servlet-api:4.0.1')
-    compile('org.springframework.boot:spring-boot-starter-web:2.2.6.RELEASE')
-    compile('org.springframework.boot:spring-boot-starter:2.2.6.RELEASE')
+    compile('org.springframework.boot:spring-boot-starter-web:2.2.7.RELEASE')
+    compile('org.springframework.boot:spring-boot-starter:2.2.7.RELEASE')
 }
 configurations {
     //移除spring boot 默认logger依赖

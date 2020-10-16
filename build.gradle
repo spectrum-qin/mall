@@ -29,7 +29,7 @@ allprojects {
         junitVersion = '4.12'
         commonsVesion = '3.0'
         slf4jVersion = '1.7.22'
-        springBootVersion = "2.2.6.RELEASE"
+        springBootVersion = "2.2.7.RELEASE"
     }
 
     //项目中所使用到的依赖，这里添加的依赖会被所有项目，包括root项目继承
@@ -82,7 +82,7 @@ buildscript {
 
     ext {
         //这里管理版本
-        springbootVersion = '2.2.6.RELEASE'
+        springbootVersion = '2.2.7.RELEASE'
     }
     dependencies {
         //spring-boot插件

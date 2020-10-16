@@ -2,7 +2,7 @@ spring:
   application:
     name: mall-admin # 系统名称
   profiles:
-    active: prod # 环境变量
+    active: dev # 环境变量
   cloud:
     nacos:
       config:
@@ -15,4 +15,8 @@ spring:
         group: mall
         enabled: true
         service: ${spring.application.name}
+#        ip: 10.94.20.20 # 自定义注册Nacos实例的IP地址
         namespace: ${spring.profiles.active}
+        metadata:
+          user.name: "admin"
+          user.password: "admin"

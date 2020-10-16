@@ -39,8 +39,6 @@ public class OrderController {
 
     @Autowired
     private MessageSend messageSend;
-    @Value("${server.port}")
-    public String port;
 
 //    @HystrixCommand(commandKey = "orderAdd", fallbackMethod = "userAddFallback")
     @RequestMapping(value = "/api/order/add", method = RequestMethod.POST)

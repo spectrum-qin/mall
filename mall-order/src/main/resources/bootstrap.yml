@@ -25,3 +25,11 @@ spring:
         binder:
           admin-addresses: 118.25.4.178
           nodes: 15672
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
