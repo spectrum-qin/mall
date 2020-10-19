@@ -31,3 +31,7 @@ management:
   health:
     rabbit:
       enabled: false
+logging:
+  config:
+    classpath: logback-spring.xml
+    path: /mydate/app/${spring.application.name}
