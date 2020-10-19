@@ -11,4 +11,5 @@ dependencies {
     compile('com.baomidou:mybatis-plus-boot-starter:3.3.0')
     compile('com.github.kfcfans:powerjob-worker-spring-boot-starter:3.2.3')
     compile('de.codecentric:spring-boot-admin-starter-client:2.2.3')
+    compile('org.springframework.boot:spring-boot-starter-actuator:2.2.7.RELEASE')
 }

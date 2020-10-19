@@ -33,7 +33,6 @@ public class UserController {
     @ResponseBody
     public DataResponse<UserAddResponse> userAdd(@RequestBody @ApiParam(name = "data", value = "新增客户请求实体",
             required = true) @Validated DataRequest<UserAddRequest> data) {
-        log.info("接收到的参数为：" + JsonUtils.objectToJson(data));
         UserAddRequest userAddRequest = data.getData();
         User user1 = BeanUtils.copyProperties(User.class, userAddRequest);
         userService.addCustManage(user1);

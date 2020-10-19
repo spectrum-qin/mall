@@ -9,17 +9,13 @@ spring:
         server-addr: 118.25.4.178:8848 # NACOS服务器地址
         file-extension: yaml # 配置文件格式
         group: mall # NACOS配置文件分组名
-        extension-configs[0]:
-          data-id: logback.xml
-          group: mall
-          refresh: true
         namespace: ${spring.profiles.active} # NACOS配置文件所在命名空间
       discovery:
         server-addr: 118.25.4.178:8848
         group: mall
         enabled: true
         service: ${spring.application.name}
-#        ip: 10.94.20.25 # 自定义注册Nacos实例的IP地址
+#        ip: 10.94.20.20 # 自定义注册Nacos实例的IP地址
         namespace: ${spring.profiles.active} # NACOS配置文件所在命名空间
         metadata:
           user.name: "admin"
